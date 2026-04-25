@@ -10,8 +10,9 @@ class Product extends Model
         'user_id',
         'name',
         'qty',
-        'price'
+        'price',
     ];
+
 
     public function user()
     {
