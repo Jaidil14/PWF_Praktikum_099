@@ -19,12 +19,10 @@
                         {{ __('About') }}
                     </x-nav-link>
 
-                    @can('manage-product')
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')"
                         class="!text-[#EDEDEC] border-b-2 !border-transparent">
                         {{ __('Product') }}
                     </x-nav-link>
-                    @endcan
                 </div>
 
             </div>
@@ -87,13 +85,10 @@
             <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="!text-[#EDEDEC]">
                 {{ __('About') }}
             </x-responsive-nav-link>
-
-            @can('manage-product')
-                <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')"
-                    class="!text-[#EDEDEC]">
-                    {{ __('Product') }}
-                </x-responsive-nav-link>
-            @endcan
+            <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')"
+                class="!text-[#EDEDEC]">
+                {{ __('Product') }}
+            </x-responsive-nav-link>
         </div>
 
     </div>

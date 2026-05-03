@@ -8,26 +8,33 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Gate;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
+
 class ProductController extends Controller
 {
     public function index()
     {
         Gate::authorize('viewAny', Product::class);
-        $products = Product::all();
+        $products = Product::paginate(10);
 
         return view('product.index', compact('products'));
     }
 
+    public function export()
+    {
+        Gate::authorize('export-product');
 
-    public function store(Request $request)
+        // Untuk keperluan praktikum, kita bisa gunakan logika dummy seperti ini
+        // atau bisa juga generate CSV sungguhan.
+        return back()->with('success', 'Export product berhasil dijalankan!');
+    }
+
+
+    public function store(StoreProductRequest $request)
     {
         Gate::authorize('create', Product::class);
-        $validated = $request->validate([
-            'name'     => 'required|string|max:255',
-            'qty'      => 'required|integer|min:0',
-            'price'    => 'required|numeric|min:0',
-            'user_id'  => 'required|exists:users,id',
-        ]);
+        $validated = $request->validated();
 
         Product::create($validated);
 
@@ -50,17 +57,12 @@ class ProductController extends Controller
         return view('product.view', compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
         Gate::authorize('update', $product);
 
-        $validated = $request->validate([
-            'name'    => 'required|string|max:255',
-            'qty'     => 'required|integer|min:0',
-            'price'   => 'required|numeric|min:0',
-            'user_id' => 'required|exists:users,id',
-        ]);
+        $validated = $request->validated();
 
         $product->update($validated);
 
@@ -71,7 +73,7 @@ class ProductController extends Controller
     {
         $product = Product::findOrFail($id);
         Gate::authorize('update', $product);
-        $users   = User::orderBy('name')->get();
+        $users = User::orderBy('name')->get();
 
         return view('product.edit', compact('product', 'users'));
     }
