@@ -18,4 +18,10 @@ Migration
 RAT Database
 <img width="1920" height="1080" alt="Screenshot 2026-04-24 122137" src="https://github.com/user-attachments/assets/7ca14744-d477-410f-9e1f-b2170594158a" />
 
+# Praktikum 6
+Validasi Store
+<img width="1920" height="1080" alt="Screenshot 2026-05-03 212827" src="https://github.com/user-attachments/assets/00ae688b-9c39-40d5-90c0-170271caabb8" />
+
+Validasi Update
+<img width="1920" height="1080" alt="Screenshot 2026-05-03 212849" src="https://github.com/user-attachments/assets/6197432a-aa7d-4a3d-b1f8-66776df90d96" />
 
