@@ -14,14 +14,21 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')"
+                        class="!text-[#EDEDEC] border-b-2 !border-transparent">
+                        {{ __('Product') }}
+                    </x-nav-link>
+
+                    @can('manage-category')
+                        <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')"
+                            class="!text-[#EDEDEC] border-b-2 !border-transparent">
+                            {{ __('Category') }}
+                        </x-nav-link>
+                    @endcan
+
                     <x-nav-link :href="route('about')" :active="request()->routeIs('about')"
                         class="!text-[#EDEDEC] border-b-2 !border-transparent">
                         {{ __('About') }}
-                    </x-nav-link>
-
-                    <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')"
-                        class="!text-[#EDEDEC] border-b-2 !border-transparent">
-                        {{ __('Product') }}
                     </x-nav-link>
                 </div>
 
@@ -32,7 +39,8 @@
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-[#A1A09A] bg-transparent hover:text-[#EDEDEC] focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }} ({{ strtoupper(Auth::user()->role) }})</div>
+                            <div>{{ Auth::user()->name }} <!--({{ strtoupper(Auth::user()->role) }})-->
+                            </div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
@@ -82,14 +90,19 @@
                 class="!text-[#EDEDEC]">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="!text-[#EDEDEC]">
-                {{ __('About') }}
-            </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.index')"
+            <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')"
                 class="!text-[#EDEDEC]">
                 {{ __('Product') }}
             </x-responsive-nav-link>
+            @can('manage-category')
+                <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')"
+                    class="!text-[#EDEDEC]">
+                    {{ __('Category') }}
+                </x-responsive-nav-link>
+            @endcan
+            <x-responsive-nav-link :href="route('about')" :active="request()->routeIs('about')" class="!text-[#EDEDEC]">
+                {{ __('About') }}
+            </x-responsive-nav-link>
         </div>
-
     </div>
 </nav>

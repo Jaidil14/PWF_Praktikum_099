@@ -22,10 +22,14 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('manage-product', function (User $user) {
-            return $user->role === 'admin';
+            return $user->role === 'admin' || $user->role === 'user';
         });
 
         Gate::define('export-product', function (User $user) {
+            return $user->role === 'admin';
+        });
+
+        Gate::define('manage-category', function (User $user) {
             return $user->role === 'admin';
         });
     }
